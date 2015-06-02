@@ -36,7 +36,7 @@ class configuration:
     WP = ["M", "L"]  # to be ordered from tighter to looser ones: ["M","L"], ["T","L"], ["T","M"]
     muChannel = True
     eleChannel = True
-    doMEcontrolPlots = True
+    doMEcontrolPlots = False
     doNNJetRegression = False
     JERfactor = 0.  # don't change it, should be 0 on data
     JESfactor = 0.  # don't change it, should be 0 on data
@@ -50,22 +50,22 @@ class configuration:
 
     # control plot classes
     controlPlots = [
-        controlPlot("jetmet", "ObjectsControlPlots", "JetmetControlPlots", {"btagging": btagging, "WP": WP}),
-        controlPlot("allMets", "ObjectsControlPlots", "MetControlPlots", {}),
-        controlPlot("vertexAssociation", "VertexAssociationControlPlots", "VertexAssociationControlPlots", {}),
-        controlPlot("matrixElements", "MatrixElementControlPlots", "MatrixElementControlPlots", {}),
+        # controlPlot("jetmet", "ObjectsControlPlots", "JetmetControlPlots", {"btagging": btagging, "WP": WP}),
+        # controlPlot("allMets", "ObjectsControlPlots", "MetControlPlots", {}),
+        # controlPlot("vertexAssociation", "VertexAssociationControlPlots", "VertexAssociationControlPlots", {}),
+        # controlPlot("matrixElements", "MatrixElementControlPlots", "MatrixElementControlPlots", {}),
     ]
 
-    if runningMode == "plots":
-        plotCP = [
-            controlPlot("allmuons", "ObjectsControlPlots", "MuonsControlPlots",
-                        {"muonList": "allmuons", "muonType": "none"}),
-            controlPlot("tightmuons", "ObjectsControlPlots", "MuonsControlPlots", {"muonType": "tight"}),
-            controlPlot("allelectrons", "ObjectsControlPlots", "ElectronsControlPlots",
-                        {"electronList": "allelectrons", "electronType": "none"}),
-            controlPlot("tightelectrons", "ObjectsControlPlots", "ElectronsControlPlots", {"electronType": "tight"}),
-        ]
-        for cp in plotCP: controlPlots.append(cp)
+    # if runningMode == "plots":
+    #     plotCP = [
+    #         controlPlot("allmuons", "ObjectsControlPlots", "MuonsControlPlots",
+    #                     {"muonList": "allmuons", "muonType": "none"}),
+    #         controlPlot("tightmuons", "ObjectsControlPlots", "MuonsControlPlots", {"muonType": "tight"}),
+    #         controlPlot("allelectrons", "ObjectsControlPlots", "ElectronsControlPlots",
+    #                     {"electronList": "allelectrons", "electronType": "none"}),
+    #         controlPlot("tightelectrons", "ObjectsControlPlots", "ElectronsControlPlots", {"electronType": "tight"}),
+    #     ]
+    #     for cp in plotCP: controlPlots.append(cp)
 
 
     # event content: lists of eventCollection, eventProducer, and eventWeight objects respectively.
@@ -75,27 +75,27 @@ class configuration:
                         eventCollection("genInfo", "GenEventInfoProduct", "generator"),
                         eventCollection("vertices", "vector<reco::Vertex>", "offlineSlimmedPrimaryVertices"),
                         eventCollection("rawjets", "vector<pat::Jet>", "slimmedJets"),
-                        eventCollection("rawsubjets", "vector<pat::Jet>", "selectedPatJetsCA8PrunedSubjetsPF"),
-                        eventCollection("rawfatjets", "vector<pat::Jet>", "selectedPatJetsCA8CHSwithNsub"),
-                        eventCollection("rawprunedjets", "vector<pat::Jet>", "selectedPatJetsCA8CHSPrunedPacked"),
-                        eventCollection("rawprunedjets2", "vector<pat::Jet>", "selectedPatJetsCA8CHSpruned"),
+                        # eventCollection("rawsubjets", "vector<pat::Jet>", "selectedPatJetsCA8PrunedSubjetsPF"),
+                        # eventCollection("rawfatjets", "vector<pat::Jet>", "selectedPatJetsCA8CHSwithNsub"),
+                        # eventCollection("rawprunedjets", "vector<pat::Jet>", "selectedPatJetsCA8CHSPrunedPacked"),
+                        # eventCollection("rawprunedjets2", "vector<pat::Jet>", "selectedPatJetsCA8CHSpruned"),
                         eventCollection("MET", "vector<pat::MET>", "slimmedMETs"),
-                        eventCollection("METNNregression", "vector<pat::MET>", "patPFMet"),
-                        eventCollection("PFMETNoCorr", "vector<pat::MET>", "patPFMet"),
-                        eventCollection("PFMET01Phi", "vector<pat::MET>", "patType01SCorrectedPFMet"),
-                        eventCollection("PFMET01", "vector<pat::MET>", "patType01CorrectedPFMet"),
-                        eventCollection("PFMET1", "vector<pat::MET>", "patTypeOnly1CorrectedPFMet"),
-                        eventCollection("PFMETPhi", "vector<pat::MET>", "patTypeSysCorrectedPFMet"),
-                        eventCollection("PFMET1Phi", "vector<pat::MET>", "patType1sysCorrectedPFMet"),
-                        eventCollection("MVAMET", "vector<pat::MET>", "patPFMetMVA"),
-                        eventCollection("NoPUMET", "vector<pat::MET>", "patPFMetNoPileUp"),
+                        # eventCollection("METNNregression", "vector<pat::MET>", "patPFMet"),
+                        # eventCollection("PFMETNoCorr", "vector<pat::MET>", "patPFMet"),
+                        # eventCollection("PFMET01Phi", "vector<pat::MET>", "patType01SCorrectedPFMet"),
+                        # eventCollection("PFMET01", "vector<pat::MET>", "patType01CorrectedPFMet"),
+                        # eventCollection("PFMET1", "vector<pat::MET>", "patTypeOnly1CorrectedPFMet"),
+                        # eventCollection("PFMETPhi", "vector<pat::MET>", "patTypeSysCorrectedPFMet"),
+                        # eventCollection("PFMET1Phi", "vector<pat::MET>", "patType1sysCorrectedPFMet"),
+                        # eventCollection("MVAMET", "vector<pat::MET>", "patPFMetMVA"),
+                        # eventCollection("NoPUMET", "vector<pat::MET>", "patPFMetNoPileUp"),
                         eventCollection("Zmumu", "vector<reco::CompositeCandidate>", "zmuTightmuTight"),
                         eventCollection("Zelel", "vector<reco::CompositeCandidate>", "zelTightelTight"),
                         eventCollection("triggerInfo", "pat::TriggerEvent", "patTriggerEvent"),
                         eventCollection("electrons", "vector<pat::Electron>", "slimmedElectrons"),
                         eventCollection("muons", "vector<pat::Muon>", "slimmedMuons"),
-                        eventCollection("allelectrons", "vector<pat::Electron>", "slimmedElectrons"),
-                        eventCollection("allmuons", "vector<pat::Muon>", "slimmedMuons"),
+                        # eventCollection("allelectrons", "vector<pat::Electron>", "slimmedElectrons"),
+                        # eventCollection("allmuons", "vector<pat::Muon>", "slimmedMuons"),
                         eventCollection("PileupSummaryInfo", "std::vector< PileupSummaryInfo >", "addPileupInfo"),
                         eventCollection("rho", "double", ("kt6PFJets", "rho")),
                         ]
@@ -110,16 +110,16 @@ class configuration:
                       eventProducer("goodJets_none", "ObjectSelection", "goodJets",
                                     {"muChannel": False, "eleChannel": False, "pt": ptjet}),
                       eventProducer("jets", "ObjectSelection", "allJets", {"jets": "rawjets"}),
-                      eventProducer("subjets", "ObjectSelection", "subjets", {}),
-                      eventProducer("fatjets", "ObjectSelection", "fatjets", {"pt": ptjet}),
-                      eventProducer("isMuTriggerOK", "ObjectSelection", "isTriggerOK",
-                                    {"muChannel": True, "eleChannel": False, "perRun": True}),
-                      eventProducer("isEleTriggerOK", "ObjectSelection", "isTriggerOK",
-                                    {"muChannel": False, "eleChannel": True, "perRun": True}),
-                      eventProducer("isINCTriggerOK", "ObjectSelection", "isTriggerIncOK", {"perRun": True}),
+                      # eventProducer("subjets", "ObjectSelection", "subjets", {}),
+                      # eventProducer("fatjets", "ObjectSelection", "fatjets", {"pt": ptjet}),
+                      # eventProducer("isMuTriggerOK", "ObjectSelection", "isTriggerOK",
+                      #               {"muChannel": True, "eleChannel": False, "perRun": True}),
+                      # eventProducer("isEleTriggerOK", "ObjectSelection", "isTriggerOK",
+                      #               {"muChannel": False, "eleChannel": True, "perRun": True}),
+                      # eventProducer("isINCTriggerOK", "ObjectSelection", "isTriggerIncOK", {"perRun": True}),
                       eventProducer("isTriggerOK", "ObjectSelection", "isTriggerOK",
                                     {"muChannel": True, "eleChannel": True, "perRun": True}),
-                      eventProducer("isHambDiMuTriggerOK", "ObjectSelection", "isTriggerHambOK", {"perRun": True}),
+                      # eventProducer("isHambDiMuTriggerOK", "ObjectSelection", "isTriggerHambOK", {"perRun": True}),
                       eventProducer("category", "EventSelection", "eventCategory",
                                     {"btagging": btagging, "WP": WP, "ZjetFilter": theZfilter}),
                       eventProducer("bestZmumuCandidate", "ObjectSelection", "findBestCandidate",
@@ -130,8 +130,8 @@ class configuration:
                                     {"muChannel": True, "eleChannel": True}),
                       eventProducer("bestDiLeptCandidate", "ObjectSelection", "findBestDiLeptCandidate",
                                     {"muChannel": True, "eleChannel": True}),
-                      eventProducer("bestHambDiMuCandidate", "ObjectSelection", "findBestHambDiMuCandidate",
-                                    {"muChannel": True}),
+                      # eventProducer("bestHambDiMuCandidate", "ObjectSelection", "findBestHambDiMuCandidate",
+                      #               {"muChannel": True}),
                       eventProducer("muonsPair", "ObjectSelection", "diLeptonsPair",
                                     {"bestLeptonCand": "bestZmumucandidate"}),
                       eventProducer("electronsPair", "ObjectSelection", "diLeptonsPair",
@@ -231,13 +231,13 @@ def updateConfMC(c=configuration):
 
     # control plot classes
     updateControlPlots = [
-        controlPlot("mcSelection", "MonteCarloSelectionControlPlots", "MonteCarloSelectionControlPlots", {}),
-        controlPlot("genMets", "MonteCarloSelectionControlPlots", "genMetsControlPlots", {}),
-        controlPlot("leptonsReweighting", "LeptonsReweightingControlPlots", "LeptonsReweightingControlPlots", {}),
-        controlPlot("mcReweighting", "MonteCarloReweightingControlPlots", "MonteCarloReweightingControlPlots", {}),
-        controlPlot("lumiReweighting", "LumiReWeightingControlPlots", "LumiReWeightingControlPlots", {}),
-        controlPlot("btaggingReweighting", "BtaggingReWeightingControlPlots", "BtaggingReWeightingControlPlots",
-                    {"btagging": c.btagging, "WP": c.WP})
+        # controlPlot("mcSelection", "MonteCarloSelectionControlPlots", "MonteCarloSelectionControlPlots", {}),
+        # controlPlot("genMets", "MonteCarloSelectionControlPlots", "genMetsControlPlots", {}),
+        # controlPlot("leptonsReweighting", "LeptonsReweightingControlPlots", "LeptonsReweightingControlPlots", {}),
+        # controlPlot("mcReweighting", "MonteCarloReweightingControlPlots", "MonteCarloReweightingControlPlots", {}),
+        # controlPlot("lumiReweighting", "LumiReWeightingControlPlots", "LumiReWeightingControlPlots", {}),
+        # controlPlot("btaggingReweighting", "BtaggingReWeightingControlPlots", "BtaggingReWeightingControlPlots",
+        #             {"btagging": c.btagging, "WP": c.WP})
     ]
     # controlPlots = configuration.controlPlots
     c.controlPlots.extend(updateControlPlots)
@@ -253,18 +253,18 @@ def updateConfMC(c=configuration):
         # eventProducer("genZparticle", "MonteCarloSelection", "getGenZparticle", { "muons":True, "electrons":True, "leptonPtCut":20, "leptonEtaCut":2.4 } )
         eventProducer("genZparticle", "MonteCarloSelection", "getGenZleptonPair",
                       {"muons": True, "electrons": True, "leptonPtCut": 20, "leptonEtaCut": 2.4}),
-        eventProducer("MEMET_4v", "MonteCarloSelection", "getMEMET_4v", {}),
-        eventProducer("NumberOfNeutrinos", "MonteCarloSelection", "getNumberOfStatus3Neutrinos", {}),
+        # eventProducer("MEMET_4v", "MonteCarloSelection", "getMEMET_4v", {}),
+        # eventProducer("NumberOfNeutrinos", "MonteCarloSelection", "getNumberOfStatus3Neutrinos", {}),
     ]
     # eventProducers = configuration.eventProducers
     c.eventProducers.extend(updateEventProducers)
 
     c.eventWeights = [
-        eventWeight("Btagging", "BtaggingWeight", "BtaggingWeight",
-                    {"jmin1": 0, "jmax1": 999, "jmin2": 0, "jmax2": 999, "file": c.btagperfData, "btagging": c.btagging,
-                     "WP": c.WP}),
-        eventWeight("Leptons", "LeptonsReweighting", "LeptonsReWeighting", {}),
-        eventWeight("MonteCarlo", "MonteCarloReweighting", "MonteCarloReWeighting", {"shift": 0, "MCmode": weightmode}),
-        eventWeight("PileUp", "LumiReWeighting", "LumiReWeighting",
-                    {"MonteCarloFileName": c.pileupMC, "DataFileName": c.pileupData, "systematicShift": 0})
+        # eventWeight("Btagging", "BtaggingWeight", "BtaggingWeight",
+        #             {"jmin1": 0, "jmax1": 999, "jmin2": 0, "jmax2": 999, "file": c.btagperfData, "btagging": c.btagging,
+        #              "WP": c.WP}),
+        # eventWeight("Leptons", "LeptonsReweighting", "LeptonsReWeighting", {}),
+        # eventWeight("MonteCarlo", "MonteCarloReweighting", "MonteCarloReWeighting", {"shift": 0, "MCmode": weightmode}),
+        # eventWeight("PileUp", "LumiReWeighting", "LumiReWeighting",
+        #             {"MonteCarloFileName": c.pileupMC, "DataFileName": c.pileupData, "systematicShift": 0})
     ]

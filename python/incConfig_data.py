@@ -2,7 +2,7 @@ from basicConfig import *
 
 # update dilepton selection
 changeDiLeptCand(conf=configuration, names={"leptonsPair": "ptSortedLeptons_DRll"})
-changeBTAG(conf=configuration, btagging="JP")
+# changeBTAG(conf=configuration, btagging="JP")
 changeJetPt(conf=configuration, ptjet=20)
 
 
@@ -11,7 +11,7 @@ class configuration(configuration):
     eventSelection = "IncEventSelection"
 
     # mode: plots or dataset
-    runningMode = "plots"
+    runningMode = "dataset"
 
     # produce EMU or LL CP:
 
@@ -23,13 +23,13 @@ class configuration(configuration):
     MetType = "PF"  # Define the type of MET you want to use. Can be PF, MVA or NoPU
 
     # my variables: files, systematics and other options
-    btagging = "JP"
+    # btagging = "JP"
     WP = ["M",
           "L"]  # to be ordered from tighter to looser ones: ["M","L"], ["T","L"], ["T","M"]    NB : only the first one will be read for the IncJets
     # Add inclusive selection plots
     controlPlots = configuration.controlPlots
     controlPlots.extend([
-        controlPlot("IncJets", "IncEventSelectionControlPlots", "IncJetControlPlots", {"btagging": btagging, "WP": WP}),
+        # controlPlot("IncJets", "IncEventSelectionControlPlots", "IncJetControlPlots", {"btagging": btagging, "WP": WP}),
         controlPlot("IncLeps", "IncEventSelectionControlPlots", "IncLepControlPlots", {}),
         controlPlot("FwdJets", "IncEventSelectionControlPlots", "IncForwardJetControlPlots", {}),
         controlPlot("selection", "IncEventSelectionControlPlots", "IncEventSelectionControlPlots", {})
@@ -37,7 +37,7 @@ class configuration(configuration):
     ])
     eventProducers = configuration.eventProducers
     eventProducers.extend([
-        eventProducer("jetInfo", "ObjectSelection", "jetMult", {"btagging": btagging, "WP": WP}),
+        # eventProducer("jetInfo", "ObjectSelection", "jetMult", {"btagging": btagging, "WP": WP}),
         eventProducer("goodJets_fwd", "ObjectSelection", "goodJets_fwd",
                       {"muChannel": True, "eleChannel": True, "pt": 20}),
 
